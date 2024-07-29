@@ -4,13 +4,12 @@ import { useState, Children, useMemo } from "react"
 import TextSearch from "./TextSearch"
 import TagsSearch from "./TagsSearch"
 function Filters({ children, tags }) {
-    const [selTags, setSelTags] = useState(["UI", "SVG"])
+    const [selTags, setSelTags] = useState([])
     const [nameTool, setNameTool] = useState('')
-
 
     const selectedTools = useMemo(() =>
         Children.toArray(children)
-            .filter((child) => filterTags({ tags: child.props.datatags, selTags, mode: 1 }))
+            .filter((child) => filterTags({ tags: child.props.datatags, selTags, mode: 0 }))
             .filter((child) => filterName({ name: child.props.dataname, nameTool }))
         , [selTags, children, nameTool])
     const amount = selectedTools.length
